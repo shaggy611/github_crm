@@ -46,7 +46,7 @@ Thumbs.db
 *.mov
 *.wmv
 
-docker-compose.yml
+# docker-compose.yml
 
 .jwt.key
 .env
