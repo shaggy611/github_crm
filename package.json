@@ -1,0 +1,25 @@
+{
+  "name": "github_crm",
+  "version": "1.0.0",
+  "description": "Github CRM test project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shaggy611/github_crm.git"
+  },
+  "keywords": [
+    "Nest",
+    "React",
+    "CRM",
+    "Github"
+  ],
+  "author": "VsevolodRomaniuk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shaggy611/github_crm/issues"
+  },
+  "homepage": "https://github.com/shaggy611/github_crm#readme"
+}
