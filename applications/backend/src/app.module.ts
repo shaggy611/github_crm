@@ -6,11 +6,12 @@ import {AppController} from './app.controller';
 import {AppService} from './app.service';
 import {AuthModule} from './modules/auth/auth.module';
 import {AccountsModule} from "./modules/accounts/accounts.module";
+import { GithubModule } from './modules/github/github.module';
+import {GithubProjectsModule} from "./modules/github-projects/github-projects.module";
 
 @Global()
 @Module({
     imports: [
-        // DatabaseModule,
         AuthModule,
         AccountsModule,
 
@@ -23,6 +24,8 @@ import {AccountsModule} from "./modules/accounts/accounts.module";
             useFactory: async (configService: ConfigService) =>
                 configService.get('typeorm'),
         }),
+        GithubModule,
+        GithubProjectsModule
     ],
     controllers: [AppController],
     providers: [AppService],

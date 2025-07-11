@@ -87,7 +87,11 @@ const Authentication = (props) => {
                             </Button>
                         </Box>
                     </Paper>
-                    : <><p>Registered</p></>
+                    : (<Paper elevation={3} sx={{p: 4, mt: 8}}>
+                        <Alert variant="filled" severity="success" sx={{fontSize: '1.2rem'}}>
+                            Account successfully created!
+                        </Alert>
+                    </Paper>)
             }
         </Container>
     </>

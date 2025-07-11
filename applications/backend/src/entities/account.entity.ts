@@ -1,15 +1,18 @@
-import { Column, Entity, Unique } from 'typeorm';
+import {Column, Entity, OneToMany, Unique} from 'typeorm';
 import { BaseEntity } from "./base.entity";
-import {hash as hashFunction} from 'bcrypt';
+import {GithubProject} from "./github-project.entity";
 
 @Entity('accounts')
-@Unique(['email'])
+// @Unique(['email'])
 export class Account extends BaseEntity {
     @Column()
     email: string;
 
     @Column()
     password: string;
+
+    @OneToMany(() => GithubProject, (project) => project.account)
+    projects: GithubProject[];
 
     static create(context) {
         const {

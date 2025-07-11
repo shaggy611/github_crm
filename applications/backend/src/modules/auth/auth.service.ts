@@ -38,15 +38,6 @@ export class AuthService {
         };
     }
 
-    async validateUser(email: string, pass: string) {
-        const user = await this.accountService.findAccountByEmail(email);
-        if (user && await bcrypt.compare(pass, user.password)) {
-            const { password, ...result } = user;
-            return result;
-        }
-        return null;
-    }
-
     async login(user: any) {
         const payload = { email: user.email, sub: user.id };
         return {
@@ -66,7 +57,7 @@ export class AuthService {
 
         const isMatch = await bcrypt.compare(password, user.password);
 
-        if (!isMatch) throw new BadRequestException('Invalid credentials');
+        if (!isMatch) throw new UnauthorizedException('Invalid credentials');
 
         return this.login(user);
     }
