@@ -1,10 +1,10 @@
-import * as React from "react";
+import Header from "../components/Header";
 
-export const Repositories = () => {
+export const RepositoriesPage = () => {
 
     return <>
-
+        <Header />
     </>
 }
 
-export default Repositories
+export default RepositoriesPage
