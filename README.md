@@ -4,6 +4,7 @@
 
 - Docker  
 - Docker Compose
+- **Node.js version 20.14.0 or higher** (required for local development and building the backend)
 
 ---
 
