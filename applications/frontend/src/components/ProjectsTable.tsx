@@ -20,7 +20,7 @@ interface Props {
     projects: GithubProject[];
 }
 
-const ProjectsTable: React.FC<Props> = ({projects, loading, handleDeleteProject, handleRefreshProject}) => {
+const ProjectsTable = ({projects, loading, handleDeleteProject, handleRefreshProject}) => {
 
     return (
         <>
