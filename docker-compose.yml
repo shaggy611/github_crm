@@ -24,8 +24,9 @@ services:
       DATABASE_HOST: postgres
       DATABASE_PORT: 5432
       DATABASE_PASSWORD: c7fw63jd32aw3
-      DATABASE_USER: crm_user
+      DATABASE_USERNAME: crm_user
       DATABASE_NAME: crm
+      JWT_SECRET: 57e231b741d2f541
     volumes:
       - ./applications/backend:/app
       - /app/node_modules
