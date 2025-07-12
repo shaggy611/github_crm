@@ -21,7 +21,7 @@ const Header = () => {
             <AppBar position="fixed" color="primary" sx={{ width: '100%' }}>
                 <Toolbar>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1, textAlign: 'left' }}>
-                        CRM
+                        REPOS
                     </Typography>
 
                     {user?.email && (

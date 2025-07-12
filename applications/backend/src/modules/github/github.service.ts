@@ -16,6 +16,8 @@ export class GithubService {
             const response = await firstValueFrom(this.httpService.get(url));
             const data = response.data;
 
+            console.log(response.data);
+
             return {
                 owner: data.owner.login,
                 name: data.name,

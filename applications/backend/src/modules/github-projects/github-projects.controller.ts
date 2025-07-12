@@ -16,7 +16,19 @@ export class GithubProjectsController {
 
     @UseGuards(JwtAuthGuard)
     @Get('repositories-list')
-    findAllreposByAccountId(@Request() req) {
+    findAllProjectsByAccountId(@Request() req) {
         return this.githubProjectsService.findAllreposByAccountId(req);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Post('delete-repository')
+    deleteSingleProject(@Body() context, @Request() req) {
+        return this.githubProjectsService.deleteSingleRepositoryById(context,req);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Post('refresh-repository')
+    refreshProjectById(@Body() context, @Request() req) {
+        return this.githubProjectsService.refreshSingleRepositoryById(context, req);
     }
 }

@@ -1,4 +1,4 @@
-import {Injectable} from '@nestjs/common';
+import {Injectable, NotFoundException} from '@nestjs/common';
 import {InjectRepository} from "@nestjs/typeorm";
 import {GithubProject} from "../../entities/github-project.entity";
 import {Repository} from "typeorm";
@@ -39,6 +39,63 @@ export class GithubProjectsService {
 
         const {id} = await this.accountService.findAccountByEmail(userEmail);
 
-        return await this.findAllreposByAccountId(id);
+        return this.projectsRepository.find({
+            where: {
+                account: {
+                    id
+                }
+            },
+            order: {
+                createdAt: 'DESC'
+            }
+        })
+    }
+
+    async refreshSingleRepositoryById(context, req): Promise<GithubProject> {
+        const {id} = context;
+        const {id: accountId} = await this.accountService.findAccountByEmail(req.user.email);
+
+        const project = await this.projectsRepository.findOne({
+            where: {
+                id,
+                account: {id: accountId},
+            }
+        });
+
+        if (!project) throw new NotFoundException('Project not found');
+
+        const freshData = await this.githubService.fetchRepoData(`${project.owner}/${project.name}`);
+
+        project.owner = freshData.owner;
+        project.url = freshData.url;
+        project.stars = freshData.stars;
+        project.forks = freshData.forks;
+        project.issues = freshData.issues;
+        project.createdAtUtc = freshData.createdAtUtc;
+
+        await this.projectsRepository.save(project);
+
+        return project;
+    }
+
+    async deleteSingleRepositoryById(context, req) {
+        const {id} = context;
+
+        const {id: accountId} = await this.accountService.findAccountByEmail(req.user.email);
+
+        const project = await this.projectsRepository.findOne({
+            where: {
+                id,
+                account: {id: accountId},
+            },
+        });
+
+        if (!project) {
+            throw new NotFoundException('Project not found or access denied');
+        }
+
+        await this.projectsRepository.remove(project);
+
+        return {message: 'Project deleted successfully'};
     }
 }

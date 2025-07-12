@@ -14,7 +14,7 @@ export function useLoginAccount() {
 
         try {
             const response =  await loginAccount(data);
-            navigate('/repositories');
+            navigate('/');
 
             return response;
         } catch (err: any) {

@@ -10,7 +10,7 @@ function App() {
     return (
         <>
             <Routes>
-                <Route path="/repositories" element={
+                <Route path="/" element={
                     <PrivateRoute>
                         <RepositoriesPage/>
                     </PrivateRoute>

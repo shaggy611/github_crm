@@ -35,7 +35,7 @@ const Authentication = (props) => {
     });
 
     return <>
-        <Container maxWidth="sm" sx={{width: '100%'}}>
+        <Container maxWidth="sm" sx={{width: '100%', mt: 20}}>
             {
                 !isRegisterSuccess
                     ? <Paper elevation={3} sx={{p: 4, mt: 8}}>

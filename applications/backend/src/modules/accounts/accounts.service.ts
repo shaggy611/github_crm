@@ -33,10 +33,4 @@ export class AccountsService {
             where: {email}
         })
     }
-
-    async findAccountById(id: string): Promise<Account | null> {
-        return this.accountRepository.findOne({
-            where: {id}
-        })
-    }
 }
