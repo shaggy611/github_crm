@@ -1,42 +1,36 @@
-version: '3.9'
+version: '3.8'
 
 services:
-  backend:
-    container_name: backend
-    build:
-      context: ./applications/backend
-      dockerfile: Dockerfile
-    ports:
-      - "3001:3000"
-    environment:
-      - DATABASE_URL=postgresql://crm_user:c7fw63jd32aw3@postgres:5432/crm
-    depends_on:
-      - postgres
-    restart: unless-stopped
-
-  frontend:
-    container_name: frontend
-    build:
-      context: ./applications/frontend
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    environment:
-      - REACT_APP_API_URL=http://localhost:3001
-    restart: unless-stopped
-
   postgres:
-    container_name: postgres
-    image: postgres:16
+    image: postgres:15
     restart: always
+    environment:
+      POSTGRES_USER: crm_user
+      POSTGRES_PASSWORD: c7fw63jd32aw3
+      POSTGRES_DB: crm
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-    environment:
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
-      POSTGRES_DB: mydb
+
+  backend:
+    build:
+      context: ./applications/backend
+    depends_on:
+      - postgres
+    ports:
+      - "3000:3000"
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - ./applications/backend:/app
+      - /app/node_modules
+
+  frontend:
+    build:
+      context: ./applications/frontend
+    depends_on:
+      - backend
+    ports:
+      - "5173:80"
 
 volumes:
-  pgdata:
+  postgres_data:

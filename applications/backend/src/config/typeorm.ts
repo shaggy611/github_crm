@@ -15,6 +15,8 @@ const config = {
     entities: ['dist/entities/*.js'],
     migrations: ['dist/migrations/*.js'],
     namingStrategy: new SnakeNamingStrategy(),
+    synchronize: true,
+    autoLoadEntities: true,
 } as DataSourceOptions;
 
 export default registerAs('typeorm', () => config);
